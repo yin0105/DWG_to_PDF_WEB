@@ -1,0 +1,58 @@
+<h1 id="sendplot-print-server">SendPlot Print Server</h1>
+<h2 id="requirements">Requirements</h2>
+<h3 id="python-2.7.x">Python 2.7.x</h3>
+<h4 id="install">Install</h4>
+<ul>
+<li>After installation add Python &amp; Python\scripts folders to SYSTEM PATH</li>
+</ul>
+<hr />
+<h3 id="irfanview">IrfanView</h3>
+<ul>
+<li>Version 4.37</li>
+</ul>
+<h4 id="install-1">Install</h4>
+<ul>
+<li>Install to C:\Program Files (x86)\IrfanView\</li>
+<li>Install IrfanView plugin: Postscript.dll to .\plugins</li>
+<li>Install IrfanView plugin: BabCAD4Image.dll to .\plugins</li>
+<li>IrfanView &gt; Option &gt; Properties/Settings &gt; Plugins &gt; Postscript Options &gt; select <strong>Retrieve GS location from System Registry</strong></li>
+</ul>
+<hr />
+<h3 id="ghostscript">GhostScript</h3>
+<ul>
+<li>Version: 9.15</li>
+</ul>
+<h4 id="install-2">Install</h4>
+<ul>
+<li>Install to C:\usr\local\gs\gs9.15</li>
+<li>Add C:\usr\local\gs\gs9.15\bin to SYSTEM PATH</li>
+<li>Import registry key: <strong>ghostscript.reg</strong></li>
+</ul>
+<hr />
+<h3 id="novapdf">novaPDF</h3>
+<p>novaPDF is installed on client computers rather than the server.</p>
+<p>novaPDF is used to embed fonts within the CAD drawing PDF's.</p>
+<p>Without embedded fonts Acrobat Readers substitute fonts not present on the viewing computer. The results are not ideal.</p>
+<h4 id="install-3">Install</h4>
+<ul>
+<li>Install novaPDF on computer that will produce PDF's from CAD files</li>
+<li>Use installation and setup instructions from the wiki -- http://odcl5/wiki/index.php/NovaPdfSettings</li>
+</ul>
+<hr />
+<h2 id="queue-setup">Queue Setup</h2>
+<ul>
+<li>The queue folders follow a similar layout to PlotManager queues.</li>
+<li>QUEUE-ROOT: The root folder of the PDF queues. When SendPlot Print Server starts it makes a list of queues from the subfolders and monitors those folders for PDF files. When a PDF file is copied into a QUEUE SendPlot Print Server prints it to the configured printer and removes the PDF file from the QUEUE. If queue folders are added or removed restart SendPlot Server.</li>
+<li>QUEUE: Each available printer and page size has a separate queue. An IrfanView INI file resides in each queue. The INI file contains configuration options for the Printer name, page size, orientation handling and output fit to page.</li>
+<li>Open a PDF drawing in IrfanView</li>
+<li>File menu &gt; Print</li>
+<li>Check <strong>Auto Rotate</strong></li>
+<li>Select Print Size &gt; <strong>Best fit to page (aspect ratio)</strong></li>
+<li>Position &gt; check <strong>Centered</strong></li>
+<li>Printer setup button &gt; choose printer and page size</li>
+<li>Test the print settings and change settings if needed</li>
+<li>Locate the INI file with the new settings at %APPDATA%\IrfanView\i_view32.ini. (Open Windows Explorer and in the address bar type <strong>%APPDATA%\IrfanView\</strong>)</li>
+<li>Create a new queue folder below the QUEUE-ROOT</li>
+<li>Copy the new IrfanView INI file to the new queue folder. Do not make any other changes in IrfanView until after the INI file is copied.</li>
+</ul>
+<hr />
