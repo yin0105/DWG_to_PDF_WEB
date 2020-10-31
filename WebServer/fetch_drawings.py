@@ -56,7 +56,7 @@ def read_json():
 
 
 def search_for_drawing():
-    for key, value in dCombined.iteritems():
+    for key, value in dCombined.items():
         if sSearch == '*':
             dReturned[key] = value
         elif key.startswith(sSearch):

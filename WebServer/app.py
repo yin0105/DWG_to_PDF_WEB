@@ -1,6 +1,6 @@
 from flask import Flask, abort, render_template, send_from_directory, request, make_response
 
-from werkzeug.contrib.cache import SimpleCache
+from cachelib.simple import SimpleCache
 from flask_debugtoolbar import DebugToolbarExtension
 
 import os
@@ -8,7 +8,7 @@ import json
 import time
 import logging
 import re
-import urllib2
+import urllib3
 from shutil import copyfile
 from livereload import Server
 
@@ -99,7 +99,7 @@ def search_for_drawing(q, dCombined):
     iLimit = 0
     dReturned = {}
     q = q.upper()
-    for key, value in dCombined.iteritems():
+    for key, value in dCombined.items():
         if iLimit > SEARCH_LIMIT:
             return dReturned
         key = key.upper()
@@ -121,7 +121,7 @@ def read_mb_notes_json():
 
 def search_for_mb_notes(q, dMbNotes):
     dReturned = {}
-    for key, value in dMbNotes.iteritems():
+    for key, value in dMbNotes.items():
         if key == q:
             dReturned[key] = value
     return dReturned
@@ -355,13 +355,13 @@ def get_file_meta(filepath, filename):
 
 @app.route('/api/get_mb_drawings/<q>')
 def get_mb_drawings(q):
-    print '\t\t\t ' + q
+    print ('\t\t\t ' + q)
     dMbDrawings = {}
     with open('mb_drawings.json') as json_file:
         dMbDrawings = json.load(json_file)
 
     dReturned = {}
-    for key, value in dMbDrawings.iteritems():
+    for key, value in dMbDrawings.items():
         if key == q:
             # logger.info( 'key, value')
             # logger.info(  key )
@@ -374,13 +374,13 @@ def get_mb_drawings(q):
 
 @app.route('/api/get_media/<q>')
 def get_media(q):
-    print '\t\t\t ' + q
+    print ('\t\t\t ' + q)
     dMedia = {}
     with open('picture_directories.json') as json_file:
         dMedia = json.load(json_file)
 
     dReturned = {}
-    for key, value in dMedia.iteritems():
+    for key, value in dMedia.items():
         if key == q:
             # logger.info( 'key, value')
             # logger.info(  key )
@@ -396,7 +396,7 @@ def get_media_folder(q):
     dMedia = {}
     lMedia = []
     safe_files = ['.JPG', '.MP4', '.AVI', '.MOV', '.PNG', '.TIF']
-    q = urllib2.unquote(q)
+    q = urllib3.unquote(q)
     q = q.replace('\\\\', '/')
     for file in os.listdir(q):
         if file[-4:].upper() in safe_files:
@@ -419,8 +419,8 @@ def get_misplaced_files():
 @app.route('/api/get_image/<q>/<r>')
 def get_image(q, r):
     q = q.replace('\\\\', '/')
-    q = urllib2.unquote(q)
-    r = urllib2.unquote(r)
+    q = urllib3.unquote(q)
+    r = urllib3.unquote(r)
     filename = r
     directory = q
     logger.info(filename)

@@ -68,7 +68,7 @@ file_count = 0
 matched = 0
 unmatched = 0
 
-for root in dCombined.iteritems():
+for root in dCombined.items():
     # print root[0]
     if has_prf(root[1]) and has_dwg(root[1]):
         matched += 1
