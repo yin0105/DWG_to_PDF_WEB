@@ -1,0 +1,163 @@
+{
+  "Checker": {
+    "allowed": " .dwg  ",
+    "misplaced_files": [
+      "no misplaced files"
+    ],
+    "updated": "2020-10-30 13:09:45"
+  },
+  "Drawings": {
+    "allowed": " .dwg .wdp .wdt .wdl .wda  ",
+    "misplaced_files": [
+      "1X4841S14002.SLDDRW",
+      "72720.SLDDRW",
+      "73057.SLDDRW",
+      "73058.SLDDRW",
+      "73205.SLDDRW",
+      "73315.SLDDRW",
+      "73318.SLDDRW",
+      "73319.SLDDRW",
+      "73447.SLDDRW",
+      "73450.SLDDRW",
+      "73613-00.dwl2",
+      "75590-A03.dwl",
+      "75590-A03.dwl2",
+      "75590-A15.dwl",
+      "75590-A15.dwl2",
+      "75590-A16.dwl",
+      "75590-A16.dwl2",
+      "76172.SLDDRW",
+      "76233.SLDDRW",
+      "78071.SLDDRW",
+      "78072.SLDDRW",
+      "78073.SLDDRW",
+      "78074.SLDDRW",
+      "78075.SLDDRW",
+      "78082.SLDDRW",
+      "78087.SLDDRW",
+      "78453.SLDDRW",
+      "78621.SLDDRW",
+      "79730-09.bak",
+      "79730-11.bak",
+      "80117.SLDASM",
+      "80428.SLDPRT",
+      "80429.SLDPRT",
+      "80430.SLDPRT",
+      "80431.SLDPRT",
+      "80432.SLDPRT",
+      "80433.SLDPRT",
+      "80434.SLDPRT",
+      "80435.SLDPRT",
+      "80436.SLDPRT",
+      "80700.SLDDRW",
+      "80712-00.dxf",
+      "80912-00.dxf",
+      "81221.SLDDRW",
+      "81222.SLDDRW",
+      "81223.SLDDRW",
+      "Thumbs.db"
+    ],
+    "updated": "2020-10-30 13:09:45"
+  },
+  "Layouts": {
+    "allowed": " .dwg .slddrw .sldasm .sldprt  ",
+    "misplaced_files": [
+      "Thumbs.db"
+    ],
+    "updated": "2020-10-30 13:09:45"
+  },
+  "MBDrawings": {
+    "allowed": " .pdf  ",
+    "misplaced_files": [
+      "Thumbs.db"
+    ],
+    "updated": "2020-10-30 13:09:44"
+  },
+  "PDFDrawings": {
+    "allowed": " .pdf .tif  ",
+    "misplaced_files": [
+      "no misplaced files"
+    ],
+    "updated": "2020-10-30 13:09:45"
+  },
+  "SW Commercial": {
+    "allowed": " .sldprt .sldasm ",
+    "misplaced_files": [
+      "72946.SLDDRW",
+      "72947.SLDDRW",
+      "72948.SLDDRW",
+      "Thumbs.db"
+    ],
+    "updated": "2020-10-30 13:09:45"
+  },
+  "SW Drawings": {
+    "allowed": " .slddrw ",
+    "misplaced_files": [
+      "18806.SLDPRT",
+      "51045-C1.dwg",
+      "51045-C2.dwg",
+      "71425.SLDPRT",
+      "71426.sldasm",
+      "72131-A0.dwg",
+      "74355.SLDPRT",
+      "74764.SLDASM",
+      "75106.SLDPRT",
+      "75299.DWG",
+      "75384.SLDPRT",
+      "75396-00.dwg",
+      "75639_Mod.dwg",
+      "75639_Modi.dwg",
+      "75960.SLDASM",
+      "76310.SLDPRT",
+      "76839.SLDASM",
+      "76840.SLDASM",
+      "76841.SLDASM",
+      "76842.SLDASM",
+      "77381-00.dwg",
+      "77588-00.dwg",
+      "77928-00.dwg",
+      "79115-00.DWG",
+      "81154-00.dwg",
+      "Thumbs.db"
+    ],
+    "updated": "2020-10-30 13:09:45"
+  },
+  "SW Models & Parts": {
+    "allowed": " .sldprt .sldasm ",
+    "misplaced_files": [
+      "1X2842S07001.SLDDRW",
+      "71975.SLDDRW",
+      "73639.SLDDRW",
+      "74238.SLDDRW",
+      "74859.SLDDRW",
+      "77348.SLDDRW",
+      "77434.SLDDRW",
+      "77662.STL",
+      "78298.STL",
+      "78384.SLDDRW",
+      "78385.SLDDRW",
+      "78386.SLDDRW",
+      "79085.SLDDRW",
+      "79086.SLDDRW",
+      "79087.SLDDRW",
+      "79088.SLDDRW",
+      "79195.SLDDRW",
+      "79196.SLDDRW",
+      "79214.SLDDRW",
+      "79219.SLDDRW",
+      "80856.STL",
+      "81103.STL",
+      "81105.STL",
+      "81110.STL",
+      "Thumbs.db"
+    ],
+    "updated": "2020-10-30 13:09:45"
+  },
+  "SW Reference files": {
+    "allowed": " .sldprt .sldasm .slddrw .swb .pdf .xls ",
+    "misplaced_files": [
+      "Thumbs.db"
+    ],
+    "updated": "2020-10-30 13:09:45"
+  }
+}

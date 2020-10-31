@@ -1,0 +1,60 @@
+
+## Routed folders
+
+# '/drawings/'            | '/Drawings/'           | 'l:\\Drawings'                           'dwg'
+# '/swdrawings/'          | '/SWDRAW~1/'           | 'l:\\SWDRAW~1'                           'slddrw'
+# '/swmodels/'            | '/SWMODE~1/'           | 'l:\\SWMODE~1'                           'sld*'
+# '/pdfdrawings/'         | '/PDFDrawings/'        | 'l:\\PDFDrawings'                        'pdf'
+# '/mb-archive/'          | '/masterbill_archive/' | 'f:\\ISNETW~1\\mrp\\masterbill_archive'  'pdf'
+# '/masterbills/'         | '/masterbills/'        | 'h:\\plot\\masterbills'                  'tif'
+# '/apdf/'                | '/apdf/'               | 'h:\\plot\\apdf'                         'pdf'
+# '/bpdf/'                | '/bpdf/'               | 'h:\\plot\\bpdf'                         'pdf'
+# '/cpdf/'                | '/cpdf/'               | 'h:\\plot\\cpdf'                         'pdf'
+# '/dpdf/'                | '/dpdf/'               | 'h:\\plot\\dpdf'                         'pdf'
+# '/dxf/'                 | '/dxf/'                | 'h:\\plot\\dxf'                          'dxf'
+# '/pdf/'                 | '/pdf/'                | 'h:\\plot\\pdf'                          'pdf'
+# '/scanned-tif/'         | '/scanned_tif/'        | 'h:\\plot\\scanned_tif'                  'tif'   
+# '/imported/'            | '/imported/'           | 'g:\\MB-ss\\SCANNE~1\\imported'          'pdf'
+
+
+
+## Scanned folders
+
+'f:\\ISNETW~1\\mrp\\masterbill_archive'  'pdf'   x  |
+'g:\\MB-ss\\SCANNE~1\\imported'          'pdf'   x  |
+'h:\\plot\\apdf'                         'pdf'   x  |
+'h:\\plot\\aprf'                         'prf'      | PlotManager PRF files
+'h:\\plot\\bpdf'                         'pdf'   x  |
+'h:\\plot\\bprf'                         'prf'      | PlotManager PRF files
+'h:\\plot\\cpdf'                         'pdf'   x  |
+'h:\\plot\\cprf'                         'prf'      | PlotManager PRF files
+'h:\\plot\\dpdf'                         'pdf'   x  |
+'h:\\plot\\dprf'                         'prf'      | PlotManager PRF files
+'h:\\plot\\dxf'                          'dxf'   x  |
+'h:\\plot\\masterbills'                  'tif'   x  |
+'h:\\plot\\pdf'                          'pdf'      | Test PDF folder
+'h:\\plot\\scanned_tif'                  'tif'   x  |
+'l:\\Drawings'                           'dwg'   x  |
+'l:\\PDFDrawings'                        'pdf'   x  |
+'l:\\SWDRAW~1'                           'slddrw'x  |
+'l:\\SWMODE~1'                           'sld*'  x  |
+
+PRF_PLOT       = 'h:\\PLOT\\'
+QUEUES         = 'G:\\queues\\'
+
+def get_path(file_url):
+  return {
+  '/Drawings/'           : 'l:\\Drawings',
+  '/SWDRAW~1/'           : 'l:\\SWDRAW~1',
+  '/SWMODE~1/'           : 'l:\\SWMODE~1',
+  '/PDFDrawings/'        : 'l:\\PDFDrawings',
+  '/masterbill_archive/' : 'f:\\ISNETW~1\\mrp\\masterbill_archive', 
+  '/masterbills/'        : 'h:\\plot\\masterbills',
+  '/apdf/'               : 'h:\\plot\\apdf',
+  '/bpdf/'               : 'h:\\plot\\bpdf',
+  '/cpdf/'               : 'h:\\plot\\cpdf',
+  '/dpdf/'               : 'h:\\plot\\dpdf',
+  '/dxf/'                : 'h:\\plot\\dxf',
+  '/scanned_tif/'        : 'h:\\plot\\scanned_tif',
+  '/imported/'           : 'g:\\MB-ss\\SCANNE~1\imported'
+  }
