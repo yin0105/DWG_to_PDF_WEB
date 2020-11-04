@@ -1,0 +1,14 @@
+{
+  "LaserAsize":          "Eng Laser A size",
+  "LaserBsize":          "Eng Laser B size",
+  "ISLaserAsize":        "IS Laser A size",
+  "ISLaserBsize":        "IS Laser B size",
+  "CSize":               "Plotter C size",
+  "DSize":               "Plotter D size",
+  "SalesLaserAsize":     "Sales Laser A size",
+  "SalesLaserBsize":     "Sales Laser B size",
+  "ShopLaserAsize":      "Shop Laser A size",
+  "ShopLaserBsize":      "Shop Laser B size",
+  "StockroomLaserAsize": "Stockroom Laser A size",
+  "StockroomLaserBsize": "Stockroom Laser B size"
+}

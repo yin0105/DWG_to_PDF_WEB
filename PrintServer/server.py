@@ -51,7 +51,7 @@ def initialize():
       for queue in listdir(QUEUES):
         if not queue.endswith('md'):
           queue_count += 1
-          q_config                              = configparser.RawConfigParser()
+          q_config                              = ConfigParser.RawConfigParser()
           q_config.read(QUEUES + '\\' + queue + '\\i_view32.ini')
           print_config                          = q_config._sections['Print']
           q_struc                               = {'printer': print_config['printer'], 'path': QUEUES + '\\' + queue}

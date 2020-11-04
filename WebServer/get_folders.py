@@ -37,4 +37,4 @@ iCnt = 0
 # create_files()
 
 for folder in folders:
-    print folder
+    print(folder)

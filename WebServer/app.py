@@ -11,6 +11,9 @@ import re
 import urllib3
 from shutil import copyfile
 from livereload import Server
+from os.path import join, dirname
+from dotenv import load_dotenv
+import fetch_drawings
 
 app = Flask(__name__)
 app.secret_key = 'l1wovKLN7xsMT5bieGN3vVnyhzQwNJmdmzzr5NMjC7AbaxJyRx34n5qXHuDBHBXUix2BLlBeoDZNh3XcNqUZLHC6oZzVioCq'
@@ -322,9 +325,26 @@ def get_printer():
 
 @app.route('/api/get_printers/')
 def get_printers():
-    with open('printers.json') as printers_json:
-        dPrinters = json.load(printers_json)
+    # with open('printers.json') as printers_json:
+    #     dPrinters = json.load(printers_json)
+    dotenv_path = join(dirname(__file__), '../.env')
+    load_dotenv(dotenv_path)
+    dPrinters = json.loads(str(os.environ.get('PRINTERS')))
+    # scan_directories_env = os.environ.get('SCAN_DIRECTORIES')
+    # dDirectories = []
+    # for line in scan_directories_env.splitlines():
+    #     if line.strip() == "": continue
+    #     line_tmp = []
+    #     for word in line.split(","):
+    #         word = word.strip()
+    #         line_tmp.append(word[1:-1])
+    #     dDirectories.append(line_tmp)
+    # print(dDirectories)
+    # return dDirectories
+    # print("#"*30)
+    # print(json.dumps(dPrinters))
     return json.dumps(dPrinters)
+    # return "OK"
 
 
 @app.route('/api/get_file_meta/<path:filepath>/<path:filename>')
@@ -439,6 +459,12 @@ def get_mb_notes(q):
     dMbNotes = read_mb_notes_json()
     dReturned = search_for_mb_notes(q, dMbNotes)
     return json.dumps(dReturned)
+
+@app.route('/api/rescan')
+def rescan():  
+    print("before")
+    # fetch_drawings  
+    print("after")
 
 # *********************************************************************************************
 # *           API calls

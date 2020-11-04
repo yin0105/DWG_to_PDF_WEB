@@ -891,6 +891,17 @@
       }
     });
 
+    $('#btn_rescan').on('click', function() {
+      console.log("rescan")
+      $.ajax({
+        url: '/api/rescan'
+      }).done(function(data) {
+        console.log("ajax ok")
+      }).fail(function(data) {
+        console.log("ajax failed")
+      });
+    });
+
     /**************************************************************************************************
      *                            Search text box has focus
     *************************************************************************************************

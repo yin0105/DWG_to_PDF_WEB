@@ -67,5 +67,5 @@ dReturned['stats'] = { 'search_string'  : sSearch + '...',
                        'drawings_found' : str(len(dReturned)),
                        'search_time'    : sSearched }
 
-print json.dumps(dReturned, sort_keys=True, indent=2, separators=(',', ': '))
+print(json.dumps(dReturned, sort_keys=True, indent=2, separators=(',', ': ')))
 

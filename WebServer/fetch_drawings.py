@@ -1,21 +1,23 @@
-# import sys
-# import os
 import glob
 import json
 import timeit
+import os
+from os.path import join, dirname
+from dotenv import load_dotenv
 
-aDirs = [['h:\\plot\\scanned_tif', 'tif'], ['h:\\plot\\masterbills', 'tif'],
-         ['h:\\plot\\apdf', 'pdf'], [
-             'h:\\plot\\bpdf', 'pdf'], ['h:\\plot\\pdf', 'pdf'],
-         ['h:\\plot\\cpdf', 'pdf'], [
-             'h:\\plot\\dpdf', 'pdf'], ['h:\\plot\\dxf', 'dxf'],
-         ['h:\\plot\\aprf', 'prf'], ['h:\\plot\\bprf', 'prf'], [
-             'h:\\plot\\cprf', 'prf'],
-         ['h:\\plot\\dprf', 'prf'],
-         ['l:\\PDFDrawings', 'pdf'], ['l:\\Drawings', 'dwg'], [
-             'l:\\SWDRAW~1', 'slddrw'],
-         ['l:\\SWMODE~1', 'sld*'], ['f:\\ISNETW~1\\mrp\\masterbill_archive', 'pdf'],
-         ['g:\\MB-ss\\SCANNE~1\\imported', 'pdf'], ['I:\\research\\R51541\\Finished', 'sld*']]
+
+# aDirs = [['h:\\plot\\scanned_tif', 'tif'], ['h:\\plot\\masterbills', 'tif'],
+#          ['h:\\plot\\apdf', 'pdf'], [
+#              'h:\\plot\\bpdf', 'pdf'], ['h:\\plot\\pdf', 'pdf'],
+#          ['h:\\plot\\cpdf', 'pdf'], [
+#              'h:\\plot\\dpdf', 'pdf'], ['h:\\plot\\dxf', 'dxf'],
+#          ['h:\\plot\\aprf', 'prf'], ['h:\\plot\\bprf', 'prf'], [
+#              'h:\\plot\\cprf', 'prf'],
+#          ['h:\\plot\\dprf', 'prf'],
+#          ['l:\\PDFDrawings', 'pdf'], ['l:\\Drawings', 'dwg'], [
+#              'l:\\SWDRAW~1', 'slddrw'],
+#          ['l:\\SWMODE~1', 'sld*'], ['f:\\ISNETW~1\\mrp\\masterbill_archive', 'pdf'],
+#          ['g:\\MB-ss\\SCANNE~1\\imported', 'pdf'], ['I:\\research\\R51541\\Finished', 'sld*']]
 
 
 def get_dir_dict(fDir, fType, fLink):
@@ -71,8 +73,20 @@ def save_directories():
 
 
 def read_directories():
-    with open('scanned_directories.json') as json_file:
-        dDirectories = json.load(json_file)
+    # with open('scanned_directories.json') as json_file:
+    #     dDirectories = json.load(json_file)
+    dotenv_path = join(dirname(__file__), '../.env')
+    load_dotenv(dotenv_path)
+    scan_directories_env = os.environ.get('SCAN_DIRECTORIES')
+    dDirectories = []
+    for line in scan_directories_env.splitlines():
+        if line.strip() == "": continue
+        line_tmp = []
+        for word in line.split(","):
+            word = word.strip()
+            line_tmp.append(word[1:-1])
+        dDirectories.append(line_tmp)
+    print(dDirectories)
     return dDirectories
 
 
@@ -102,6 +116,6 @@ dReturned['stats'] = {'search_string': sSearch + '...',
                       'drawings_found': str(len(dReturned)),
                       'search_time': sSearched}
 
-save_directories()
+# save_directories()
 
 # print json.dumps(dReturned, sort_keys=True, indent=2, separators=(',', ': '))
