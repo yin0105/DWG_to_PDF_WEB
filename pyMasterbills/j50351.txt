@@ -1,0 +1,81 @@
+     ISS  ITEM QTY NOTES DRAWING NUMBER REV   DESCRIPTION             CUST DOC      Customer: PATL5-1 - PATHEON INC.                            Unscrambler Specs for Job#    j50351
+          1                                                                         Machine Location: MISSISSUAGA ONT CANADA                                         Line# N/A            
+     3    2    1        D68776000PR0          PDF-CDF FRAME ASSEMBLY           P                                                                              Customer PO# 4500061310               
+          3                                                                                                             
+     1    4    1        D690730MB0NA     B    PDF HEAD ASSEMBLY                Y    Machine construction methods: STANDARD MECHS & ELECS       
+          5                                                                         Operating Environment: STD PHARM                                               Change Parts Construction: STANDARD
+          6                                                                                                             
+          7                                                                           Unscrambler Model              PDF       Hopper N/A          Pos N/A         
+          8                                                                           Matl ST ST'L      Fin GRAINED              Matl N/A          Fin N/A         
+          9                                                                           Rotation:                   L to R                                            G Size     Type     CPM     Note    
+         10                                                                           Orientation System:            N/A       Drive Location:                N/A   - -------- -------- ------- ----    
+         11                                                                           Support:              LEGS&CASTERS       Elevator/Horiz Guard:          N/A                                       
+         12                                                                           Spare Parts Kit:               YES       Hopper Covers:                 N/A                                       
+     1   13    1        D6611100000A          GATE SENSOR ASSEMBLY             Y      Low Air Press Detect:          YES       Support:                       N/A                                       
+         14                                                                           Scaled Adjustments:            YES                                                                                
+         15                                                                           Position Stop:                  NO                                                                                
+         16                                                                                                                                                                                             
+         17                                                                                                                                                                                             
+         18                                                                                                                                                                                             
+         19                                                                                                                                                                                             
+     1   20    1        D63066000PCA     A    SIDE BELT ASSEMBLY               Y                                                                                                                        
+     1   21    1        C5142800000A     D    ADJUSTABLE OUTER RAIL ASSY                                                                                                                                
+     1   22    1        D69134S0000K     A    PDF UNWIND ASSY                  Y                                                                                                                        
+         23                                                                                                                    Pre-Orienter Type:             N/A                                       
+         24                                                                                                                    Pre-Orienter Rotatio:          N/A                                       
+         25                                                                                                                    Sorter Discs:                  N/A                                       
+         26                                                                                                                    Height:                        N/A                                       
+         27                                                                                                                    Drive Size:                    N/A                                       
+         28                                                                                                                    Top Cover:                     N/A                                       
+         29                                                                                                                    Air Jets:                      N/A                                       
+         30                                                                                                                                                                                             
+         31                                                                                                                                                                                             
+         32                                                                         Electrical nema rating: OMEGA STD                                               Customer Documentation Manuals: 1   
+         33                                                                                   supply volts: 208                                                     Manual Type:               STANDARD 
+         34                                                                                          phase: 3                                                       Manual on Disk:                 YES 
+         35                                                                                             hz: 60                                                      PLC Program on Disk:            YES 
+         36                                                                             operator interface: OIT-COLOR                                               Autocad Dwgs: YES   DWG             
+     1   37    1        D66173S00NK0          PDF REJECT ASSEMBLY              Y             location side: STANDARD                                                                                    
+     2   38  REF        D70143000000          PDF WIRING SCHEMATIC             Y                                                Discharge Convr Mfg:     CUSTOMER                                       
+     2   39    1        D70162000000          PDF WIRING DIAGRAM               Y                                             Height: 36"     Adjust:       +/-1"                                        
+     1   40    1        264366                36 X 36 X 12 ELECTRICAL BOX             Electrical Disconnec:        STANDARD  Integrate Cust Conv:              NO                                       
+         41                                                                           Control MFG:          AB COMPACTLOGIX  Matl: N/A           Fin:         N/A                                       
+     1   42    1        C60821000NK0          CONVEYOR BACKLOG SENSOR ASSY     Y      Recipe Selection:                 YES  Extended Length:                 N/A                                       
+     1   43    1        C416900020A0     A    TELEMEC BEACON INDICATOR ASSY    Y      Signal Column:                    YES  Drive By:                   CUSTOMER                                       
+     2   44    1        D65990S03ES0          REMOTE OIT ASSEMBLY              Y                                             Drive Size:                      N/A   NamePlate Information:              
+     3   45  REF        C68626000000          PDF PNEUMATIC SCHEMATIC          Y                                             Table Top Chain:                 ???                 AC Volts: 208         
+     3   46    1        D67548020000     A    PDF PNEUMATIC DIAGRAM            Y                                                                              ???                    Phase: 3           
+         47                                                                                                                                                  ????                       Hz: 60          
+         48                                                                                                                  Transfer Side Facing Direction Flow:                F.L. Amps: ??          
+     5   49  REF        D70483000000          PDF MACHINE LAYOUT               Y                                                                              N/A              Largest FLA: ??          
+     1   50  REF        J50351-LIST           SPARE PARTS LIST                 Y                                                                                        Short Circuit Amps: 5KA         
+         51                                                                                                                                                                       Air Psig: 80          
+         52                                                                                                                                                                           Scfm: ??          
+     4   53    1        B68217003000          DESICCANT FUNNEL ASSEMBLY        P                                                                                                                        
+     3   54    1        C70233000000          INTERNAL DESICCANT GUIDE ASSY    P                                                                                                                        
+         55                                                                                                                                                                                             
+         56                                                                                                                                                                                             
+         57                                                                                                                                                                                             
+         58                                                                         REMARKS:                                                                                          ISSUE INFO
+         59                                                                         1) UL LISTED ELECTRICAL PANEL                                                                  1   06/27  JCS      
+         60                                                                                                                                                                        2   07/17  DCB      
+         61                                                                                                                                                                        3   08/21  JAR      
+         62                                                                                                                                                                        4   09/05  SM       
+         63                                                                                                                                                                        5   09/09  GAR      
+         64                                                                         
+     1   65    1        C56096000000          ROUND BOTTLE QUICK CHANGE RAIL        
+         66                                                                         
+         67                                                                         
+         68                                                                         
+         69                                                                         
+     1   70    1        B67549000QN0          QD PRESSURE SENSOR ASSY          Y    
+     1   71    1        B41046000QD0     B    QD LOW FLOW ASSEMBLY             Y    
+     1   72    1        D62999000000     A    PDF UNWIND AIR DRYER ASSEMBLY    Y    
+         73                                                                         
+         74                                                                         
+     5   75    1        D70482000000          HUMIDITY & DEW PT SENSOR ASSY    Y                                                                                       Specs Created on: 06/26/14
+         76                                                                                                                                                            Specs Updated on: 06/26/14
+         77                                                                                                                                                            Specs Printed at: 09/18/14 10:26
+         78                                                                         
+     1   79    1        J50351PURELP          OUTPLANT UL PANEL WIRING LABOR        
+                                                                                                                                                                    Masterbill generated 10-19-14 16:47:
