@@ -4,7 +4,7 @@ import timeit
 import os
 from os.path import join, dirname
 from dotenv import load_dotenv
-
+import threading
 
 # aDirs = [['h:\\plot\\scanned_tif', 'tif'], ['h:\\plot\\masterbills', 'tif'],
 #          ['h:\\plot\\apdf', 'pdf'], [
@@ -41,6 +41,7 @@ def get_dir_combined(dDrawingList):
 
 
 def scan_all_directories():
+    print("Scanning directories ...")
     for drawing_directory in aDirs:
         dDirectory = get_dir_dict(drawing_directory[0], drawing_directory[
                                   1], drawing_directory[2])
@@ -49,6 +50,7 @@ def scan_all_directories():
     fJSON.write(json.dumps(dCombined, sort_keys=True,
                            indent=2, separators=(',', ': ')))
     fJSON.close()
+    threading.Timer(300, scan_all_directories).start()
 
 
 def read_json():
@@ -86,7 +88,7 @@ def read_directories():
             word = word.strip()
             line_tmp.append(word[1:-1])
         dDirectories.append(line_tmp)
-    print(dDirectories)
+    # print(dDirectories)
     return dDirectories
 
 

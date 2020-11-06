@@ -15,6 +15,9 @@ from os.path import join, dirname
 from dotenv import load_dotenv
 import fetch_drawings
 
+path_url = {}
+url_path = {}
+
 app = Flask(__name__)
 app.secret_key = 'l1wovKLN7xsMT5bieGN3vVnyhzQwNJmdmzzr5NMjC7AbaxJyRx34n5qXHuDBHBXUix2BLlBeoDZNh3XcNqUZLHC6oZzVioCq'
 
@@ -88,12 +91,14 @@ def read_json():
 
 
 def get_web_links(links):
+    global path_url
     web_links = []
     for url in links:
         last_slash = url.rfind('\\')
-        next_slash = url[0:last_slash].rfind('\\') + 1
-        web_links.append(
-            '/download' + get_url(url[next_slash:last_slash]) + url[url.rfind('\\') + 1:])
+        # next_slash = url[0:last_slash].rfind('\\') + 1
+        # web_links.append(
+        #     '/download' + get_url(url[next_slash:last_slash]) + url[url.rfind('\\') + 1:])
+        web_links.append('/download/' + path_url[url[:last_slash]] + "/" + url[url.rfind('\\') + 1:])
     return web_links
 
 
@@ -110,6 +115,10 @@ def search_for_drawing(q, dCombined):
             dReturned[key] = get_web_links(value)
             iLimit += 1
         elif key.startswith(q):
+            print("key " + " *" * 50)
+            print(key)
+            print("value " + " *" * 50)
+            print(value)
             dReturned[key] = get_web_links(value)
             iLimit += 1
     return dReturned
@@ -130,62 +139,64 @@ def search_for_mb_notes(q, dMbNotes):
     return dReturned
 
 
-def get_path(file_url):
-    return {
-        'drawings': 'l:\\Drawings',
-        'pdf_out': 'l:\\pdf_out',
-        'tiff_pdf': 'l:\\tiff_pdf',
-        'swcommercial': 'l:\\SWCOMM~1',
-        'swdrawings': 'l:\\SWDRAW~1',
-        'swmodels': 'l:\\SWMODE~1',
-        'swreference': 'l:\\SWREFE~1',
-        'pdfdrawings': 'l:\\PDFDrawings',
-        'scanned_asize' : 'l:\\scanned_asize',
-        'mb-archive': 'f:\\ISNETW~1\\mrp\\masterbill_archive',
-        'masterbills': 'h:\\plot\\masterbills',
-        'apdf': 'h:\\plot\\apdf',
-        'bpdf': 'h:\\plot\\bpdf',
-        'cpdf': 'h:\\plot\\cpdf',
-        'dpdf': 'h:\\plot\\dpdf',
-        'pdf': 'h:\\plot\\pdf',
-        'aprf': 'h:\\plot\\aprf',
-        'bprf': 'h:\\plot\\bprf',
-        'cprf': 'h:\\plot\\cprf',
-        'dprf': 'h:\\plot\\dprf',
-        'dxf': 'h:\\plot\\dxf',
-        'scanned-tif': 'h:\\plot\\scanned_tif',
-        'imported': 'g:\\MB-ss\\SCANNE~1\\imported',
-        'finished': 'i:\\research\\R51541\\Finished'
-    }[file_url]
+# def get_path(file_url):
+#     return {
+#         'drawings': 'l:\\Drawings',
+#         'pdf_out': 'l:\\pdf_out',
+#         'tiff_pdf': 'l:\\tiff_pdf',
+#         'swcommercial': 'l:\\SWCOMM~1',
+#         'swdrawings': 'l:\\SWDRAW~1',
+#         'swmodels': 'l:\\SWMODE~1',
+#         'swreference': 'l:\\SWREFE~1',
+#         'pdfdrawings': 'l:\\PDFDrawings',
+#         'scanned_asize' : 'l:\\scanned_asize',
+#         'mb-archive': 'f:\\ISNETW~1\\mrp\\masterbill_archive',
+#         'masterbills': 'h:\\plot\\masterbills',
+#         'apdf': 'h:\\plot\\apdf',
+#         'bpdf': 'h:\\plot\\bpdf',
+#         'cpdf': 'h:\\plot\\cpdf',
+#         'dpdf': 'h:\\plot\\dpdf',
+#         'pdf': 'h:\\plot\\pdf',
+#         'aprf': 'h:\\plot\\aprf',
+#         'bprf': 'h:\\plot\\bprf',
+#         'cprf': 'h:\\plot\\cprf',
+#         'dprf': 'h:\\plot\\dprf',
+#         'dxf': 'h:\\plot\\dxf',
+#         'scanned-tif': 'h:\\plot\\scanned_tif',
+#         'imported': 'g:\\MB-ss\\SCANNE~1\\imported',
+#         'finished': 'i:\\research\\R51541\\Finished'
+#     }[file_url]
 
 
-def get_url(web_url):
-    return {
-        'Drawings': '/drawings/',
-        'pdf_out': '/pdf_out/',
-        'tiff_pdf': '/tiff_pdf/',
-        'SWCOMM~1': '/swcommercial/',
-        'SWDRAW~1': '/swdrawings/',
-        'SWMODE~1': '/swmodels/',
-        'SWREFE~1': '/swreference/',
-        'PDFDrawings': '/pdfdrawings/',
-        'scanned_asize': '/scanned_asize/',
-        'masterbill_archive': '/mb-archive/',
-        'masterbills': '/masterbills/',
-        'apdf': '/apdf/',
-        'bpdf': '/bpdf/',
-        'cpdf': '/cpdf/',
-        'dpdf': '/dpdf/',
-        'pdf': '/pdf/',
-        'aprf': '/aprf/',
-        'bprf': '/bprf/',
-        'cprf': '/cprf/',
-        'dprf': '/dprf/',
-        'dxf': '/dxf/',
-        'scanned_tif': '/scanned-tif/',
-        'imported': '/imported/',
-        'finished': '/finished/'
-    }[web_url]
+# def get_url(web_url):
+    # print("web_url = " + web_url)
+    # return {
+    #     'Drawings': '/drawings/',
+    #     'pdf_out': '/pdf_out/',
+    #     'pdfout': '/pdfout/',
+    #     'tiff_pdf': '/tiff_pdf/',
+    #     'SWCOMM~1': '/swcommercial/',
+    #     'SWDRAW~1': '/swdrawings/',
+    #     'SWMODE~1': '/swmodels/',
+    #     'SWREFE~1': '/swreference/',
+    #     'PDFDrawings': '/pdfdrawings/',
+    #     'scanned_asize': '/scanned_asize/',
+    #     'masterbill_archive': '/mb-archive/',
+    #     'masterbills': '/masterbills/',
+    #     'apdf': '/apdf/',
+    #     'bpdf': '/bpdf/',
+    #     'cpdf': '/cpdf/',
+    #     'dpdf': '/dpdf/',
+    #     'pdf': '/pdf/',
+    #     'aprf': '/aprf/',
+    #     'bprf': '/bprf/',
+    #     'cprf': '/cprf/',
+    #     'dprf': '/dprf/',
+    #     'dxf': '/dxf/',
+    #     'scanned_tif': '/scanned-tif/',
+    #     'imported': '/imported/',
+    #     'finished': '/finished/'
+    # }[web_url]
 
 # Routed folders
     # '/drawings/'            | '/Drawings/'           | 'l:\\Drawings'                           'dwg'
@@ -222,7 +233,7 @@ def download(filepath, filename):
                 request.remote_addr + ' - download file - ' + filename)
     if '..' in filename or filename.startswith('/'):
         abort(404)
-    directory = get_path(filepath)
+    directory = url_path[filepath]
     logger.info('file path: ' + directory)
     if os.path.isfile(directory + '\\' + filename):
         return send_from_directory(directory, filename, as_attachment=True)
@@ -255,14 +266,14 @@ def print_file(printer, folder, filename):
     returnJSON['description'] = filename[filename.rfind('.'):].upper()
 
     logger.info('File exists? ' +
-                str(os.path.isfile(get_path(folder) + '\\' + filename)))
+                str(os.path.isfile(url_path[folder] + '\\' + filename)))
 
-    if os.path.isfile(get_path(folder) + '\\' + filename):
+    if os.path.isfile(url_path[folder] + '\\' + filename):
         if filename[filename.rfind('.'):].upper() == '.PDF':
             returnJSON['action'] = 'Print PDF (Acrobat)'
             returnJSON['result'] = 'success'
             # returnJSON['folder'] = get_path(folder)
-            copyfile(get_path(folder) + '\\' + filename,
+            copyfile(url_path[folder] + '\\' + filename,
                      QUEUES_PDF + printer + '\\' + filename)
         elif filename[filename.rfind('.'):].upper() == '.PRF':
             returnJSON['action'] = 'Print PRF (PlotManager)'
@@ -325,26 +336,10 @@ def get_printer():
 
 @app.route('/api/get_printers/')
 def get_printers():
-    # with open('printers.json') as printers_json:
-    #     dPrinters = json.load(printers_json)
     dotenv_path = join(dirname(__file__), '../.env')
     load_dotenv(dotenv_path)
     dPrinters = json.loads(str(os.environ.get('PRINTERS')))
-    # scan_directories_env = os.environ.get('SCAN_DIRECTORIES')
-    # dDirectories = []
-    # for line in scan_directories_env.splitlines():
-    #     if line.strip() == "": continue
-    #     line_tmp = []
-    #     for word in line.split(","):
-    #         word = word.strip()
-    #         line_tmp.append(word[1:-1])
-    #     dDirectories.append(line_tmp)
-    # print(dDirectories)
-    # return dDirectories
-    # print("#"*30)
-    # print(json.dumps(dPrinters))
     return json.dumps(dPrinters)
-    # return "OK"
 
 
 @app.route('/api/get_file_meta/<path:filepath>/<path:filename>')
@@ -355,7 +350,7 @@ def get_file_meta(filepath, filename):
     file_meta = {}
     file_meta['link'] = '/download/' + filepath + '/' + filename
     # ********* Do not return path to web
-    file_meta['path'] = get_path(filepath)
+    file_meta['path'] = url_path[filepath]
     file_meta['name'] = filename
     # ********* Check if files exists
     if os.path.isfile(file_meta['path'] + '\\' + file_meta['name']):
@@ -466,6 +461,34 @@ def rescan():
     # fetch_drawings  
     print("after")
 
+def read_directories():
+    global path_url, url_path
+    dotenv_path = join(dirname(__file__), '../.env')
+    load_dotenv(dotenv_path)
+    scan_directories_env = os.environ.get('SCAN_DIRECTORIES')
+    for line in scan_directories_env.splitlines():
+        if line.strip() == "": continue
+        try :
+            line_tmp = [word.strip()[1:-1] for word in line.split(",")]
+
+            # Append path_url dictionary
+            if line_tmp[0] in path_url.keys():
+                if line_tmp[2] != path_url[line_tmp[0]] :
+                    return (1, line_tmp[0])
+            else:
+                path_url[line_tmp[0]] = line_tmp[2]
+
+            # Append url_path dictionary
+            if line_tmp[2] in url_path.keys():
+                if line_tmp[0] != url_path[line_tmp[2]] :
+                    return (2, line_tmp[2])
+            else:
+                url_path[line_tmp[2]] = line_tmp[0]
+        except :
+            return (0, "")
+    
+    return (3, "")
+
 # *********************************************************************************************
 # *           API calls
 # *********************************************************************************************
@@ -479,6 +502,9 @@ logger.info('Initializing...')
 
 logger.info('starting...')
 
+
+
+
 if __name__ == '__main__':
     server = Server(app.wsgi_app)
 
@@ -491,5 +517,30 @@ if __name__ == '__main__':
     server.watch('static/js/app.coffee', 'make_coffee.cmd', delay=1)
     server.watch('static/docs/*.md', 'make_docs.cmd', delay=1)
 
-    # server.serve(port=80)
-    app.run()
+    result, path = read_directories()
+    if result < 3:
+        print("""
+        
+            ######################################################################
+            #                                                                    #
+            #       Check the SCAN_DIRECTORIES variable in the .env file.        #""")
+        if result == 1:
+            print("          #       There are duplicate directory path.  (See below.)            #")
+        elif result == 2:
+            print("          #       There are duplicate URLs.  (See below.)                      #")
+        
+        print("""          #                                                                    #
+            ######################################################################
+            """)
+
+        if result == 1:
+            print("")
+            print("            duplicate URL: " + path)        
+        elif result == 2:
+            print("")
+            print("            duplicate path: " + path)
+
+        print("")
+    else:
+        # server.serve(port=80)
+        app.run()

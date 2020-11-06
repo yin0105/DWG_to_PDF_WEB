@@ -16,5 +16,6 @@ Usage
 Setting for Environment ( Edit .env file )
 --------------------------
 1. File scan locations
-<code><img height="35" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png"></code>
-<code><img width="300" height="300" src="https://github.com/solutionLi/DWG_to_PDF_WEB/png/git_1.png"></code>
+  <p><code><img src="https://github.com/teknoprep/sendplot/blob/main/png/git_1.png" width="800" height="400"></code><p>
+2. Printers
+  <p><code><img src="https://github.com/teknoprep/sendplot/blob/main/png/git_2.png" width="800" height="400"></code>
