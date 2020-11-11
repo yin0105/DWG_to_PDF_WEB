@@ -1,6 +1,3 @@
-
-
-
 file_in = 'f:\\Operations\\masterbills\\text\\A72262000000.txt'
 
 f = open(file_in, 'r')

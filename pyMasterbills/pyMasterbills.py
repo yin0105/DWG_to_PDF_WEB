@@ -13,32 +13,37 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter, A4, LEGAL, elevenSeventeen,landscape
 
-in_queue   = '\\\\135.57.34.1\\smbshare\\mbills\\'
-out_queue  = '\\\\omegafs01\\data\\Operations\\masterbills\\'
-archive    = '\\\\omegafs01\\data\\IS Network\\mrp\\masterbill_archive\\'
+from os.path import join, dirname
+from dotenv import load_dotenv
 
 
-     
-#    delay in seconds of the scan cycle
-scan_delay = 5
+dotenv_path = join(dirname(__file__), '../.env')
+load_dotenv(dotenv_path)
+
+in_queue    = os.environ.get('IN_QUEUE') + "\\"
+out_queue   = os.environ.get('OUT_QUEUE') + "\\"
+archive     = os.environ.get('ARCHIVE') + "\\"
+log_dir     = os.environ.get('MASTERBILLS_LOG_DIR') + "\\"
+scan_delay  = float(os.environ.get('MASTERBILLS_SCAN_DELAY'))
+
 
 class Logger(logging.Logger):
-   def __init__(self):
-       logging.Logger.__init__(self, 'masterbill_processor')
+  def __init__(self):
+    logging.Logger.__init__(self, 'masterbill_processor')
 
-       formatter = logging.Formatter('%(asctime)s-%(levelname)s-%(message)s')
-       #     Set level for the events to be logged
-       self.root.setLevel(logging.NOTSET)
-       #     Create handler for logging to console
-       console = logging.StreamHandler()
-       console.setLevel(0)
-       console.setFormatter(formatter)
-       self.addHandler(console)
-       #     Create handler for logging to log file
-       sLogFile = 'C:/var/hg/pyMasterbills/log/masterbill_processor.log'
-       fileHandler = logging.FileHandler(sLogFile)
-       fileHandler.setFormatter(formatter)
-       self.addHandler(fileHandler)
+    formatter = logging.Formatter('%(asctime)s-%(levelname)s-%(message)s')
+    #     Set level for the events to be logged
+    self.root.setLevel(logging.NOTSET)
+    #     Create handler for logging to console
+    console = logging.StreamHandler()
+    console.setLevel(0)
+    console.setFormatter(formatter)
+    self.addHandler(console)
+    #     Create handler for logging to log file
+    sLogFile = log_dir + 'masterbill_processor.log'
+    fileHandler = logging.FileHandler(sLogFile)
+    fileHandler.setFormatter(formatter)
+    self.addHandler(fileHandler)
 
 def signal_handler(signal, frame):
     print ('Shutting down Masterbill Processor!')
@@ -206,72 +211,71 @@ def check_existing_pdf(pdf):
     return True
 
 
-def writeLogToHtml():
-    sLogFile = 'c:/var/hg/pyMasterbills/log/masterbill_processor.log'
-    sHtmlFile = 'c:/var/hg/pyMasterbills/log/masterbill-log.html'  #'//ntsvr4/www_eng$/masterbill-log.html'
-    sMblogFile = 'c:/var/hg/pyMasterbills/log/mblog.json'  #'//ntsvr4/www_eng$/mblog.json'
-    sMbqueueFile = 'c:/var/hg/pyMasterbills/log/mbqueue.json'  #'//ntsvr4/www_eng$/mbqueue.json'
+def writeLogToHtml():  
+  sLogFile = log_dir + 'masterbill_processor.log'
+  sHtmlFile = log_dir + 'masterbill-log.html'  #'//ntsvr4/www_eng$/masterbill-log.html'
+  sMblogFile = log_dir + 'mblog.json'  #'//ntsvr4/www_eng$/mblog.json'
+  sMbqueueFile = log_dir + 'mbqueue.json'  #'//ntsvr4/www_eng$/mbqueue.json'
 
-    if os.path.getsize(sLogFile) > 100 * 1024:
-      filehandle = open(sLogFile, 'w')
-      filehandle.write('Clearing Large File\n')
-      filehandle.close()
-      print("Clearing Large File")
+  if os.path.getsize(sLogFile) > 100 * 1024:
+    filehandle = open(sLogFile, 'w')
+    filehandle.write('Clearing Large File\n')
+    filehandle.close()
+    print("Clearing Large File")
       
-    if not os.path.exists(sHtmlFile):
-      logger.info('cannot access ' + sHtmlFile)
-    else:
-      fLog_file = open(sLogFile, 'r')
-      lines = fLog_file.readlines()
-      fLog_file.close()
-      num_of_lines = len(lines)
-      lines_reversed = lines[::-1]
-      out = lines_reversed[:15]
-      mblog_json = []
-      mbqueue_json = []
-      html_out = ''
-      html_out = '<html><head><title>Masterbill Processor Logs</title>'
-      html_out = html_out + '<meta http-equiv="refresh" content="10"></head><body>'
-      html_out = html_out + '<span style="font-size: 18pt; font-family: arial;">Masterbill Processor Log</span>'
-      html_out = html_out + '<span style="font-size: 18pt; font-family: arial; float: right;">' + time_stamp() + '&nbsp;'
-      html_out = html_out + '<img src="/images/ajax-loader.gif" width="25" height="25">&nbsp;</span><br><br><hr>'
+  if not os.path.exists(sHtmlFile):
+    logger.info('cannot access ' + sHtmlFile)
+  else:
+    fLog_file = open(sLogFile, 'r')
+    lines = fLog_file.readlines()
+    fLog_file.close()
+    num_of_lines = len(lines)
+    lines_reversed = lines[::-1]
+    out = lines_reversed[:15]
+    mblog_json = []
+    mbqueue_json = []
+    html_out = '<html><head><title>Masterbill Processor Logs</title>'
+    html_out = html_out + '<meta http-equiv="refresh" content="10"></head><body>'
+    html_out = html_out + '<span style="font-size: 18pt; font-family: arial;">Masterbill Processor Log</span>'
+    html_out = html_out + '<span style="font-size: 18pt; font-family: arial; float: right;">' + time_stamp() + '&nbsp;'
+    html_out = html_out + '<img src="/images/ajax-loader.gif" width="25" height="25">&nbsp;</span><br><br><hr>'
 
-      html_out = html_out + '<div style="font-size: 14pt; font-family: arial;">Masterbill Output [F:\Operations\Masterbills]<br><ul>'
-      output_masterbills = filter(os.path.isfile, glob.glob(out_queue + '*.pdf'))
-      output_masterbills.sort(key=lambda x: os.path.getmtime(x))
-      output_masterbills_r = output_masterbills[::-1]
+    html_out = html_out + '<div style="font-size: 14pt; font-family: arial;">Masterbill Output [F:\Operations\Masterbills]<br><ul>'
+    output_masterbills = filter(os.path.isfile, glob.glob(out_queue + '*.pdf'))
+    output_masterbills.sort(key=lambda x: os.path.getmtime(x))
+    output_masterbills_r = output_masterbills[::-1]
 
-
-      for mb in output_masterbills_r:                                                                                              
-        mb_out = mb[mb.rfind('\\'):]                                                                                       
-        mbqueue_json.append(mb_out[1:]) 
-        html_out = html_out + '<li><a target="_blank" href="http://ntsvr4/masterbills/' + mb_out[1:] + '">' 
-        html_out = html_out + '<img src="/images/acrobat.jpg" width="25" height="25"> &nbsp; ' + mb_out[1:].upper() + '</a> &nbsp; '
-        html_out = html_out + '<a target="_blank" href="http://ntsvr4/masterbills/text/' + mb_out[:-3] + 'txt" title="  Text version of the Masterbill -- right-click Save Link as  ">'
-        html_out = html_out + '<img src="/images/notepad01.gif" width="12" height="12"></a></li>'
+    for mb in output_masterbills_r:                                                                                              
+      mb_out = mb[mb.rfind('\\'):]                                                                                       
+      mbqueue_json.append(mb_out[1:]) 
+      html_out = html_out + '<li><a target="_blank" href="http://ntsvr4/masterbills/' + mb_out[1:] + '">' 
+      html_out = html_out + '<img src="/images/acrobat.jpg" width="25" height="25"> &nbsp; ' + mb_out[1:].upper() + '</a> &nbsp; '
+      html_out = html_out + '<a target="_blank" href="http://ntsvr4/masterbills/text/' + mb_out[:-3] + 'txt" title="  Text version of the Masterbill -- right-click Save Link as  ">'
+      html_out = html_out + '<img src="/images/notepad01.gif" width="12" height="12"></a></li>'
       
-      html_out = html_out + '</ul>Newest files at the top | Masterbills cleared from output queue after 24 hours.<hr>'
-      html_out = html_out + '</div><div style="font-size: 8pt; font-family: arial; color: #090; background: #eee; padding: 4px;"><pre>'
+    html_out = html_out + '</ul>Newest files at the top | Masterbills cleared from output queue after 24 hours.<hr>'
+    html_out = html_out + '</div><div style="font-size: 8pt; font-family: arial; color: #090; background: #eee; padding: 4px;"><pre>'
 
-      for line in out:
-        html_out = html_out + line
-        mblog_json.append(line[:-1])
+    for line in out:
+      html_out = html_out + line
+      mblog_json.append(line[:-1])
 
-      html_out = html_out + '</pre></div><hr></body></html>'
+    html_out = html_out + '</pre></div><hr></body></html>'
 
-      fHtml = open(sHtmlFile, 'w')
-      fHtml.write(html_out)
-      fHtml.close()
+    fHtml = open(sHtmlFile, 'w')
+    fHtml.write(html_out)
+    fHtml.close()
 
-      fMblog = open(sMblogFile, 'w')
-      fMblog.write(json.dumps(mblog_json))
-      fMblog.close()
+    fMblog = open(sMblogFile, 'w')
+    fMblog.write(json.dumps(mblog_json))
+    fMblog.close()
 
-      fMbqueue = open(sMbqueueFile, 'w')
-      fMbqueue.write(json.dumps(mbqueue_json))
-      fMbqueue.close()
+    fMbqueue = open(sMbqueueFile, 'w')
+    fMbqueue.write(json.dumps(mbqueue_json))
+    fMbqueue.close()
 
-#     Initialize application
+
+# Initialize application
 logger = Logger()
 
 logger.info('Masterbill processor ||||||||||||||||||||||||||||||||||')

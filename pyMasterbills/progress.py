@@ -11,7 +11,7 @@ sProgress = '#'
 while 1:
   time.sleep(1)
   i = time_stamp()
-  sys.stdout.write("\r\t" + i + '\t[ ' + iCount * sProgress + ' ] scanning... ')
+  sys.stdout.write("\r\t" + i + '\t scanning... ' + iCount * sProgress + ' ' )
   sys.stdout.flush()
   if bUp:
     iCount = iCount + 1

@@ -32,15 +32,15 @@ def get_dir_dict(fDir, fType, fLink):
 
 
 def get_dir_combined(dDrawingList):
-    for item in dDrawingList:
-        # print item
+    for item in dDrawingList:        
         if item in dCombined:
             dCombined[item].append(dDrawingList[item])
         else:
             dCombined[item] = [dDrawingList[item]]
 
-
 def scan_all_directories():
+    global dCombined, rescan_delay
+    dCombined = {}
     print("Scanning directories ...")
     for drawing_directory in aDirs:
         dDirectory = get_dir_dict(drawing_directory[0], drawing_directory[
@@ -50,7 +50,7 @@ def scan_all_directories():
     fJSON.write(json.dumps(dCombined, sort_keys=True,
                            indent=2, separators=(',', ': ')))
     fJSON.close()
-    threading.Timer(300, scan_all_directories).start()
+    threading.Timer(rescan_delay * 60, scan_all_directories).start()
 
 
 def read_json():
@@ -100,6 +100,10 @@ dReturned = {}
 sScanned = 0
 sSearch = ''
 sSearched = 0
+dotenv_path = join(dirname(__file__), '../.env')
+load_dotenv(dotenv_path)
+rescan_delay = float(os.environ.get('RESCAN_DELAY'))
+print("#" + str(rescan_delay) + "#")
 
 aDirs = read_directories()
 
@@ -117,6 +121,8 @@ dReturned['stats'] = {'search_string': sSearch + '...',
                       'scan_time': sScanned,
                       'drawings_found': str(len(dReturned)),
                       'search_time': sSearched}
+
+
 
 # save_directories()
 

@@ -21,6 +21,7 @@ url_path = {}
 app = Flask(__name__)
 app.secret_key = 'l1wovKLN7xsMT5bieGN3vVnyhzQwNJmdmzzr5NMjC7AbaxJyRx34n5qXHuDBHBXUix2BLlBeoDZNh3XcNqUZLHC6oZzVioCq'
 
+
 #                Set app.debug = True to enable Debug Toolbar
 app.debug = False
 toolbar = DebugToolbarExtension(app)
@@ -31,8 +32,10 @@ CACHE_TIMEOUT = 30
 SEARCH_LIMIT = 1000
 
 PRF_PLOT = 'h:\\PLOT\\'
-QUEUES = 'G:\\queues\\'
-QUEUES_PDF = 'G:\\queues\\pdfOut\\'
+# QUEUES = 'G:\\queues\\'
+# QUEUES_PDF = 'G:\\queues\\pdfOut\\'
+QUEUES          = os.environ.get('PRINT_QUEUE_ROOT')
+QUEUES_PDF      = os.environ.get('PRINT_QUEUE_ROOT')
 
 DRAWING_CHARACTERS = "ABCDEX012345"
 X_PART_CHARACTERS = "12345"
@@ -115,10 +118,6 @@ def search_for_drawing(q, dCombined):
             dReturned[key] = get_web_links(value)
             iLimit += 1
         elif key.startswith(q):
-            print("key " + " *" * 50)
-            print(key)
-            print("value " + " *" * 50)
-            print(value)
             dReturned[key] = get_web_links(value)
             iLimit += 1
     return dReturned
@@ -274,7 +273,7 @@ def print_file(printer, folder, filename):
             returnJSON['result'] = 'success'
             # returnJSON['folder'] = get_path(folder)
             copyfile(url_path[folder] + '\\' + filename,
-                     QUEUES_PDF + printer + '\\' + filename)
+                     QUEUES_PDF + '\\' + printer + '\\' + filename)
         elif filename[filename.rfind('.'):].upper() == '.PRF':
             returnJSON['action'] = 'Print PRF (PlotManager)'
             returnJSON['result'] = 'success'
@@ -457,9 +456,8 @@ def get_mb_notes(q):
 
 @app.route('/api/rescan')
 def rescan():  
-    print("before")
-    # fetch_drawings  
-    print("after")
+    fetch_drawings.scan_all_directories()
+    return ""
 
 def read_directories():
     global path_url, url_path
@@ -525,11 +523,11 @@ if __name__ == '__main__':
             #                                                                    #
             #       Check the SCAN_DIRECTORIES variable in the .env file.        #""")
         if result == 1:
-            print("          #       There are duplicate directory path.  (See below.)            #")
+            print("           #       There are duplicate directory path.  (See below.)            #")
         elif result == 2:
-            print("          #       There are duplicate URLs.  (See below.)                      #")
+            print("           #       There are duplicate URLs.  (See below.)                      #")
         
-        print("""          #                                                                    #
+        print("""           #                                                                    #
             ######################################################################
             """)
 
